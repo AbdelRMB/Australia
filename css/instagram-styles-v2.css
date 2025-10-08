@@ -1,3 +1,156 @@
+/* --- MOBILE VERSION --- */
+@media (max-width: 600px) {
+  .container {
+    max-width: 100vw;
+    margin: 0;
+    padding: 0;
+    background: var(--white);
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .instagram-header {
+    height: 50px;
+    padding: 0 8px;
+    border-radius: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+  .header-content {
+    padding: 0 8px;
+    max-width: 100vw;
+  }
+  .sidebar, .sidebar-right {
+    display: none !important;
+  }
+  .main-content {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    max-width: 100vw;
+  }
+  .feed {
+    padding: 0;
+    margin-top: 54px;
+    width: 100vw;
+    max-width: 100vw;
+  }
+  .post {
+    border-radius: 0;
+    margin-bottom: 16px;
+    box-shadow: none;
+  }
+  .post-image-container {
+    width: 100vw;
+    max-width: 100vw;
+    height: auto;
+  }
+  .post-image {
+    width: 100vw;
+    max-width: 100vw;
+    height: auto;
+    object-fit: cover;
+    border-radius: 0;
+  }
+  .post-header, .post-actions, .post-caption, .post-likes, .post-comments-btn, .post-time {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .profile-container {
+    max-width: 100vw;
+    padding: 0;
+  }
+  .profile-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 8px 0 8px;
+  }
+  .profile-avatar-large {
+    width: 80px;
+    height: 80px;
+    font-size: 32px;
+    margin-bottom: 8px;
+  }
+  .profile-info {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .profile-stats {
+    flex-direction: row;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+  .profile-tabs {
+    padding: 0 8px;
+  }
+  .posts-grid, .user-post-item {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    width: 100vw;
+    max-width: 100vw;
+  }
+  .user-post-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 0;
+  }
+  .explore-container {
+    padding: 8px;
+  }
+  .explore-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+  }
+  .explore-item {
+    aspect-ratio: 1;
+  }
+  .nav-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    background: var(--white);
+    border-top: 1px solid var(--gray-400);
+    z-index: 1001;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 54px;
+  }
+  .nav-item {
+    flex: 1;
+    text-align: center;
+    padding: 0;
+    font-size: 22px;
+  }
+  .publish-btn, .cancel-btn {
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 0;
+  }
+  .form-actions {
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px;
+  }
+  .story {
+    min-width: 60px;
+    max-width: 60px;
+    margin-right: 8px;
+  }
+  .story-avatar {
+    width: 48px;
+    height: 48px;
+  }
+  .story-username {
+    font-size: 12px;
+    text-align: center;
+  }
+}
 /* Style Instagram authentique - Version 2 */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
