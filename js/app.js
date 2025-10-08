@@ -202,25 +202,17 @@ document.addEventListener('DOMContentLoaded',()=>{
   };
 
   const culturePosts = [
-    {user:'Éducation Culturelle',account:'education',loc:'Perth Schools',img:'https://images.unsplash.com/photo-1504198453319-5ce911bafcde?q=80&w=1200&auto=format&fit=crop',caption:'Curriculum: teaching Noongar words to children',category:'language'},
-    {user:'Préservation Noongar',account:'preservation',loc:'South West WA',img:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop',caption:'Documentation of traditional stories from the elders',category:'story'},
-    {user:'Artisanat Traditionnel',account:'artcraft',loc:'Perth',img:'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?q=80&w=1200&auto=format&fit=crop',caption:'Weaving workshop with the elders: passing on the know-how',category:'art'},
-    {user:'Éducation Culturelle',account:'education',loc:'Albany',img:'https://images.unsplash.com/photo-1499346030926-9a72daac6c63?q=80&w=1200&auto=format&fit=crop',caption:'Community choir: preserving the language through music',category:'language'},
-    {user:'Préservation Noongar',account:'preservation',loc:'Margaret River',img:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200&auto=format&fit=crop',caption:'Coastal conservation project: caring for the land',category:'conservation'},
-    {user:'Éducation Culturelle',account:'education',loc:'Denmark',img:'https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=1200&auto=format&fit=crop',caption:'Teaching Noongar place names to the new generation',category:'language'},
-    {user:'Artisanat Traditionnel',account:'artcraft',loc:'Fremantle',img:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1200&auto=format&fit=crop',caption:'Mural project celebrating Noongar stories',category:'art'},
-    {user:'Éducation Culturelle',account:'education',loc:'Bunbury',img:'https://images.unsplash.com/photo-1470770903676-69b98201ea1c?q=80&w=1200&auto=format&fit=crop',caption:'Noongar classes: basic greetings and nature words',category:'language'},
-    {user:'Préservation Noongar',account:'preservation',loc:'Mandurah',img:'https://images.unsplash.com/photo-1504198453319-5ce911bafcde?q=80&w=1200&auto=format&fit=crop',caption:'Bushfood gathering: traditional knowledge',category:'conservation'},
-    {user:'Communauté Noongar',account:'community',loc:'Perth',img:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200&auto=format&fit=crop',caption:'Annual cultural festival: dance and crafts',category:'story'},
-    {user:'Préservation Noongar',account:'preservation',loc:'Bunbury',img:'https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop',caption:'Dreamtime story: the creation of rivers',category:'story'},
-    {user:'Artisanat Traditionnel',account:'artcraft',loc:'Rural',img:'https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop',caption:'Basket weaving with natural fibers',category:'art'},
-    {user:'Artisanat Traditionnel',account:'artcraft',loc:'Perth',img:'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format&fit=crop',caption:'Contemporary art inspired by Noongar patterns',category:'art'},
-    {user:'Communauté Noongar',account:'community',loc:'South West',img:'https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop',caption:'Elders council: language revitalization programs',category:'story'},
-    {user:'Préservation Noongar',account:'preservation',loc:'Coastline',img:'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop',caption:'Monitoring coastal species: knowledge transmission',category:'conservation'},
-    {user:'Éducation Culturelle',account:'education',loc:'Region',img:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop',caption:'Interactive map of Noongar place names',category:'story'},
-    {user:'Préservation Noongar',account:'preservation',loc:'Archive',img:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1200&auto=format&fit=crop',caption:'Recording oral histories of the elders',category:'story'},
-    {user:'Éducation Culturelle',account:'education',loc:'School',img:'https://images.unsplash.com/photo-1504198453319-5ce911bafcde?q=80&w=1200&auto=format&fit=crop',caption:'School visit: learning words and songs',category:'language'},
-    {user:'Communauté Noongar',account:'community',loc:'Trail',img:'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop',caption:'Heritage walk: naming sites in Noongar',category:'story'},
+  {user:'Éducation Culturelle',account:'education',loc:'Perth Schools',img:'assets/012523PD-JPG1.jpg',caption:'Noongar children learning in school',category:'language'},
+  {user:'Préservation Noongar',account:'preservation',loc:'South West WA',img:'assets/960.webp',caption:'Noongar land and nature',category:'story'},
+  {user:'Artisanat Traditionnel',account:'artcraft',loc:'Perth',img:'assets/a_230211gennoongar02.jpg',caption:'Traditional Noongar art and crafts',category:'art'},
+  {user:'Éducation Culturelle',account:'education',loc:'Albany',img:'assets/familli1.jpeg',caption:'Noongar family gathering',category:'language'},
+  {user:'Préservation Noongar',account:'preservation',loc:'Margaret River',img:'assets/images.jpg',caption:'Noongar stories and legends',category:'story'},
+  {user:'Éducation Culturelle',account:'education',loc:'Denmark',img:'assets/Keeping Noongar alive.webp',caption:'Keeping Noongar language alive',category:'language'},
+  {user:'Artisanat Traditionnel',account:'artcraft',loc:'Fremantle',img:'assets/Noongar-6-seasons-series-III.jpg',caption:'Noongar six seasons explained',category:'art'},
+  {user:'Éducation Culturelle',account:'education',loc:'Bunbury',img:'assets/noongar.gif',caption:'Noongar language in motion',category:'language'},
+  {user:'Préservation Noongar',account:'preservation',loc:'Mandurah',img:'assets/Noongar5.23.jpg',caption:'Noongar heritage and preservation',category:'story'},
+  {user:'Communauté Noongar',account:'community',loc:'Perth',img:'assets/Olman_Walley_Noongar_Performer.jpg',caption:'Noongar performer sharing culture',category:'story'},
+  {user:'Préservation Noongar',account:'preservation',loc:'Bunbury',img:'assets/SWNTS+areas.webp',caption:'Noongar territory and regions',category:'story'},
   ];
 
   const feedPlaceholder = document.getElementById('feedPlaceholder');
