@@ -14,12 +14,12 @@
         <input type="text" class="search-input" placeholder="Rechercher">
       </div>
       <nav class="header-nav">
-        <span class="nav-icon">🏠</span>
-        <span class="nav-icon">💬</span>
-        <span class="nav-icon">🔍</span>
-        <span class="nav-icon">❤️</span>
-        <span class="nav-icon" onclick="toggleDarkMode()" title="Mode sombre">🌙</span>
-        <div class="nav-icon post-avatar">RK</div>
+        <span class="nav-icon" data-page="feed" style="cursor:pointer;">🏠</span>
+        <span class="nav-icon" data-page="create" style="cursor:pointer;">💬</span>
+        <span class="nav-icon" data-page="discover" style="cursor:pointer;">🔍</span>
+        <span class="nav-icon" data-page="feed" style="cursor:pointer;">❤️</span>
+        <span class="nav-icon" onclick="toggleDarkMode()" title="Mode sombre" style="cursor:pointer;">🌙</span>
+        <div class="nav-icon post-avatar" data-page="profile" style="cursor:pointer;">RK</div>
       </nav>
     </div>
   </header>

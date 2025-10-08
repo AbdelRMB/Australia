@@ -575,6 +575,15 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
   });
 
+  // Header navigation icons (desktop)
+  document.querySelectorAll('.header-nav .nav-icon, .header-nav .post-avatar').forEach(btn => {
+    if(btn.dataset.page) {
+      btn.addEventListener('click', () => {
+        showPage(btn.dataset.page);
+      });
+    }
+  });
+
   // Initialize UI
   updateUserPostsCount();
   displayUserPostsInProfile();
