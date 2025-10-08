@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>InstaLike - Prototype</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">CultureKeep</div>
+    <div class="search">
+      <input placeholder="Rechercher" aria-label="Rechercher">
+    </div>
+    <nav class="icons">
+      <button class="icon">✉️</button>
+      <button class="icon">❤️</button>
+      <button class="icon">➕</button>
+      <button class="avatar">RK</button>
+    </nav>
+  </header>
+
+  <!-- PAGE: Feed (default) -->
+  <section id="feedPage" class="page">
+    <main class="container">
+      <aside class="leftcol">
+      <section class="profile card">
+        <div class="avatar big">RK</div>
+        <div class="name">Riche</div>
+        <div class="bio">Voyageur • Étudiant • Photos d'Australie</div>
+      </section>
+
+      <section class="suggestions card">
+        <h3>Suggestions</h3>
+        <ul>
+          <li><span class="avatar small">AB</span><div><b>Alice</b><br><small>New</small></div><button>Suivre</button></li>
+          <li><span class="avatar small">DL</span><div><b>David</b><br><small>Populaire</small></div><button>Suivre</button></li>
+        </ul>
+      </section>
+    </aside>
+
+    <section class="feed">
+      <div class="feed-controls card">
+        <div class="filters">
+          <button class="filter-btn active" data-filter="all">Tous</button>
+          <button class="filter-btn" data-filter="story">Histoires</button>
+          <button class="filter-btn" data-filter="language">Langue</button>
+          <button class="filter-btn" data-filter="art">Art</button>
+          <button class="filter-btn" data-filter="conservation">Conservation</button>
+        </div>
+        <div class="search-small"><input placeholder="Filtrer" aria-label="Filtrer"></div>
+      </div>
+      <div class="stories card" id="stories">
+        <!-- stories will be injected -->
+      </div>
+
+      <div id="feedPlaceholder">
+        <!-- Posts will be injected here by js/app.js -->
+      </div>
+
+    </section>
+
+    <aside class="rightcol">
+      <section class="preserve card" aria-labelledby="preserveTitle">
+        <h3 id="preserveTitle">Préservation culturelle</h3>
+        <p><strong>Tribu :</strong> Noongar</p>
+        <p><strong>Localisation :</strong> South West, Western Australia</p>
+        <p class="muted">But : aider à préserver la langue et la culture Noongar via des ressources, des mots à apprendre et des histoires.</p>
+        <h4>Ressources</h4>
+        <ul>
+          <li><a href="https://www.noongarculture.org.au" target="_blank" rel="noopener">Noongar Culture Org (exemple)</a></li>
+          <li><a href="#" id="contributeLink">Contribuer une ressource</a></li>
+        </ul>
+        <h4>Mots Noongar</h4>
+        <ul id="languageList" class="language-list">
+          <!-- language words injected here -->
+        </ul>
+      </section>
+    </aside>
+    </main>
+  </section>
+
+  <!-- PAGE: Créer Post -->
+  <section id="createPage" class="page hidden">
+    <div class="container single-col">
+      <div class="card">
+        <h2>Créer un post culturel</h2>
+        <form id="createPostForm">
+          <div class="form-group">
+            <label>Image :</label>
+            <input type="file" id="postImage" accept="image/*" required>
+            <div id="imagePreview" class="image-preview hidden"></div>
+          </div>
+          <div class="form-group">
+            <label>Titre :</label>
+            <input type="text" id="postTitle" placeholder="Ex: Atelier tissage traditionnel" required>
+          </div>
+          <div class="form-group">
+            <label>Description :</label>
+            <textarea id="postDescription" rows="4" placeholder="Décris l'importance culturelle, le lieu, l'impact..." required></textarea>
+          </div>
+          <div class="form-group">
+            <label>Catégorie :</label>
+            <select id="postCategory" required>
+              <option value="">Choisir...</option>
+              <option value="story">Histoire/Récit</option>
+              <option value="language">Langue</option>
+              <option value="art">Art/Artisanat</option>
+              <option value="conservation">Conservation</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Localisation :</label>
+            <input type="text" id="postLocation" placeholder="Ex: Perth, WA" required>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn primary">Publier le post</button>
+            <button type="button" class="btn outline" onclick="showPage('feed')">Annuler</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE: Profil -->
+  <section id="profilePage" class="page hidden">
+    <div class="container single-col">
+      <div class="card">
+        <div class="profile-header">
+          <div class="avatar big">RK</div>
+          <div class="profile-info">
+            <h2>Riche</h2>
+            <p>Étudiant passionné par la préservation culturelle</p>
+            <div class="profile-stats">
+              <span><strong id="userPostsCount">0</strong> posts créés</span>
+              <span><strong>25</strong> suivis</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Mes posts</h3>
+        <div id="userPostsGrid" class="posts-grid">
+          <!-- User posts will be displayed here -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE: Découvrir -->
+  <section id="discoverPage" class="page hidden">
+    <div class="container single-col">
+      <div class="card">
+        <h2>Découvrir</h2>
+        <p>Explore d'autres initiatives de préservation culturelle.</p>
+        <div class="discover-grid">
+          <div class="discover-item">
+            <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=400&auto=format&fit=crop" alt="Culture">
+            <h4>Ressources documentaires</h4>
+            <p>Archives et documents historiques Noongar</p>
+          </div>
+          <div class="discover-item">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=400&auto=format&fit=crop" alt="Nature">
+            <h4>Sites sacrés</h4>
+            <p>Carte interactive des lieux significatifs</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navigation -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-page="feed">
+      <span class="nav-icon">🏠</span>
+      <span class="nav-label">Feed</span>
+    </button>
+    <button class="nav-item" data-page="create">
+      <span class="nav-icon">➕</span>
+      <span class="nav-label">Créer</span>
+    </button>
+    <button class="nav-item" data-page="profile">
+      <span class="nav-icon">👤</span>
+      <span class="nav-label">Profil</span>
+    </button>
+    <button class="nav-item" data-page="discover">
+      <span class="nav-icon">🔍</span>
+      <span class="nav-label">Découvrir</span>
+    </button>
+  </nav>
+
+  <div id="storyModal" class="modal hidden" role="dialog" aria-hidden="true">
+    <div class="modal-content">
+      <button id="closeStory">✕</button>
+      <div id="storyArea"></div>
+    </div>
+  </div>
+
+  <div id="postModal" class="modal hidden" role="dialog" aria-hidden="true">
+    <div class="modal-content" id="postModalContent">
+      <button id="closePost">✕</button>
+      <div id="postDetail"></div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
