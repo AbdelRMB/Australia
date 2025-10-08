@@ -236,58 +236,84 @@ document.addEventListener('DOMContentLoaded',()=>{
     allPosts.forEach((p,idx)=>{
       if(filter && filter!=='all' && p.category !== filter) return;
       const art = document.createElement('article');
-      art.className='post card';
+      art.className='post';
       const postId = p.id ? `user-${p.id}` : `culture-${idx}`;
-      art.dataset.id = postId;
       const title = p.title || p.caption.split(':')[0];
       const description = p.description || p.caption;
-      
-      // Get specialized avatar or default
-      const avatar = p.account && specializedAccounts[p.account] ? 
-        specializedAccounts[p.account].avatar : 
-        (p.user.split(' ')[0][0] || 'N');
-      
-      const isUserPost = !!p.id;
-      
+      // Avatar stylé
+      let avatar = `<div class='post-avatar'>${p.user[0]}</div>`;
+      if(p.account === 'preservation') avatar = `<div class='post-avatar' style='background:linear-gradient(135deg,#16a34a 0%,#7c3aed 100%)'>🛡️</div>`;
+      if(p.account === 'education') avatar = `<div class='post-avatar' style='background:linear-gradient(135deg,#0b66c3 0%,#bc1888 100%)'>📚</div>`;
+      if(p.account === 'artcraft') avatar = `<div class='post-avatar' style='background:linear-gradient(135deg,#dc2626 0%,#bc1888 100%)'>🎨</div>`;
+      if(p.account === 'community') avatar = `<div class='post-avatar' style='background:linear-gradient(135deg,#7c3aed 0%,#16a34a 100%)'>🤝</div>`;
+      if(p.user === 'Riche') avatar = `<div class='post-avatar'>RK</div>`;
+
       art.innerHTML = `
-        <header class="post-head">
-          <div class="avatar small ${p.account ? 'specialized' : ''}" ${p.account ? `style="background:${specializedAccounts[p.account].color}"` : ''}>${avatar}</div>
-          <div>
-            <b>${p.user}</b>
-            <div class="location">${p.loc}</div>
+        <div class="post-header">
+          ${avatar}
+          <div class="post-user-info">
+            <a href="#" class="post-username">${p.user}</a>
+            <div class="post-location">${p.loc}</div>
           </div>
-          ${isUserPost ? `<button class="btn-delete-post" data-id="${p.id}" title="Supprimer">🗑️</button>` : ''}
-        </header>
-        <div class="post-media">
-          <img src="${p.img}" alt="${title}">
+          <button class="post-options">⋯</button>
         </div>
-        <div class="post-body">
-          <h3 class="post-title">${title}</h3>
-          <p class="post-summary">${description}</p>
+        <div class="post-image-container">
+          <img src="${p.img}" alt="${title}" class="post-image">
         </div>
         <div class="post-actions">
-          <button class="btn like heart-burst">♡ <span class="count">${likesState[postId] ?? Math.floor(Math.random()*200+10)}</span></button>
-          <button class="btn btn-more" data-idx="${idx}" data-is-user="${isUserPost}">En savoir plus</button>
+          <div class="post-actions-left">
+            <button class="action-btn like-btn">
+              <!-- Instagram heart SVG -->
+              <svg aria-label="J’aime" fill="none" height="24" viewBox="0 0 24 24" width="24"><path d="M16.792 3.906c-1.64 0-3.093.81-4.043 2.09-.95-1.28-2.403-2.09-4.043-2.09C5.01 3.906 2.75 6.166 2.75 8.906c0 4.28 7.25 9.188 7.25 9.188s7.25-4.908 7.25-9.188c0-2.74-2.26-5-5.208-5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </button>
+            <button class="action-btn">
+              <!-- Instagram comment SVG -->
+              <svg aria-label="Commenter" fill="none" height="24" viewBox="0 0 24 24" width="24"><path d="M21.5 12c0 4.694-4.306 8.5-9.5 8.5a9.77 9.77 0 0 1-4.2-.93l-4.3 1.13a.75.75 0 0 1-.93-.93l1.13-4.3A9.77 9.77 0 0 1 2.5 12c0-4.694 4.306-8.5 9.5-8.5s9.5 3.806 9.5 8.5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </button>
+            <button class="action-btn">
+              <!-- Instagram send SVG -->
+              <svg aria-label="Partager" fill="none" height="24" viewBox="0 0 24 24" width="24"><path d="M22 3L2 12.5l7.5 2.5L17 21l5-18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </button>
+          </div>
+          <button class="action-btn">
+            <!-- Instagram bookmark SVG -->
+            <svg aria-label="Enregistrer" fill="none" height="24" viewBox="0 0 24 24" width="24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </button>
         </div>
-        <div class="caption"><b>${p.user}</b> <div class="tags">#Noongar #Culture</div></div>
+        <div class="post-likes">
+          <span class="likes-count">${likesState[postId] ?? Math.floor(Math.random()*200+10)} mentions J'aime</span>
+        </div>
+        <div class="post-caption">
+          <span class="caption-username">${p.user}</span>
+          <span class="caption-text">${description}</span>
+        </div>
+        <button class="post-comments-btn view-comments" data-idx="${idx}" data-is-user="${!!p.id}">Afficher les 12 commentaires</button>
+        <div class="post-time">IL Y A ${Math.floor(Math.random()*24+1)} HEURES</div>
       `;
       feedPlaceholder.appendChild(art);
     });
 
     // attach like handlers to newly created posts
-    feedPlaceholder.querySelectorAll('.post .like').forEach(btn=>{
+    feedPlaceholder.querySelectorAll('.post .like-btn').forEach(btn=>{
       btn.addEventListener('click',e=>{
         const art = btn.closest('.post');
         const id = art.dataset.id;
-        const countEl = btn.querySelector('.count');
-        let count = parseInt(countEl.textContent,10);
+        const likesCountEl = art.querySelector('.likes-count');
+        const heartIcon = btn.querySelector('.heart-icon');
+        
+        let countText = likesCountEl.textContent;
+        let count = parseInt(countText.split(' ')[0], 10);
+        
         const liked = btn.classList.toggle('liked');
         count = liked ? count+1 : Math.max(0,count-1);
-        countEl.textContent = count;
-        btn.innerHTML = (liked ? '❤️ ' : '♡ ') + `<span class="count">${count}</span>`;
+        
+        likesCountEl.textContent = `${count} mentions J'aime`;
+        heartIcon.textContent = liked ? '❤️' : '♡';
+        
         // heart burst animation
         btn.classList.add('active');
         setTimeout(()=>btn.classList.remove('active'),350);
+        
         // persist
         likesState[id] = count;
         localStorage.setItem(likesKey,JSON.stringify(likesState));
@@ -300,18 +326,34 @@ document.addEventListener('DOMContentLoaded',()=>{
   // Filter buttons
   document.querySelectorAll('.filter-btn').forEach(b=>{
     b.addEventListener('click',()=>{
-      document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));
+      document.querySelectorAll('.filter-btn').forEach(x=>{
+        x.classList.remove('active');
+        x.style.background = 'white';
+        x.style.color = 'var(--gray-800)';
+      });
       b.classList.add('active');
+      b.style.background = 'var(--blue)';
+      b.style.color = 'white';
       injectPosts(b.dataset.filter);
     });
   });
 
+  // Stories
   const storiesEl = document.getElementById('stories');
-  stories.forEach(s=>{
+  storiesEl.innerHTML = '';
+  const storyAccounts = [
+    {name: 'Riche', avatar: 'RK'},
+    {name: 'Alice', avatar: '<svg width="32" height="32" viewBox="0 0 32 32"><rect x="6" y="6" width="20" height="20" rx="4" fill="#6ee7b7"/><rect x="12" y="12" width="8" height="8" rx="2" fill="#3b82f6"/></svg>'}
+  ];
+  storyAccounts.forEach(acc => {
     const div = document.createElement('div');
-    div.className='story';
-    div.innerHTML = `<div class="avatar" style="background:${s.color}">${s.user[0]}</div><div class="name">${s.user}</div>`;
-    div.addEventListener('click',()=>openStory(s));
+    div.className = 'story';
+    div.innerHTML = `
+      <div class="story-avatar">
+        <div class="post-avatar">${acc.avatar}</div>
+      </div>
+      <div class="story-username">${acc.name}</div>
+    `;
     storiesEl.appendChild(div);
   });
 
@@ -339,7 +381,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
   // open post detail
   document.addEventListener('click',e=>{
-    const more = e.target.closest('.btn-more');
+    const more = e.target.closest('.view-comments');
     if(more){
       const idx = parseInt(more.dataset.idx,10);
       const isUserPost = more.dataset.isUser === 'true';
@@ -412,7 +454,130 @@ document.addEventListener('DOMContentLoaded',()=>{
   // Dark mode toggle (will be added to topbar)
   window.toggleDarkMode = toggleDarkMode;
   
+  // Profile navigation
+  function setupProfileNavigation() {
+    // Add click handlers for usernames and avatars to navigate to profiles
+    document.addEventListener('click', e => {
+      const isUsername = e.target.classList.contains('username') && !e.target.closest('.sidebar-profile');
+      const isAvatar = e.target.classList.contains('avatar') && !e.target.closest('.sidebar-profile') && e.target.closest('.post');
+      
+      if(isUsername || isAvatar) {
+        e.preventDefault();
+        const postElement = e.target.closest('.post');
+        if(postElement) {
+          const usernameEl = postElement.querySelector('.username');
+          const username = usernameEl ? usernameEl.textContent : '';
+          
+          // Check if it's a specialized account
+          const accountType = Object.keys(specializedAccounts).find(key => 
+            specializedAccounts[key].name.toLowerCase().replace(/\s+/g, '_') === username
+          );
+          
+          if(accountType) {
+            showSpecializedProfile(accountType, specializedAccounts[accountType].name);
+          } else {
+            showUserProfile(username);
+          }
+        }
+      }
+    });
+  }
+
+  function showSpecializedProfile(accountType, username) {
+    const account = specializedAccounts[accountType];
+    const posts = culturePosts.filter(p => p.account === accountType);
+    
+    alert(`Profil de ${username}\n\n${account.avatar} Compte spécialisé en préservation culturelle Noongar\n\n${posts.length} publications\n500+ abonnés\n\nMission: Préserver et transmettre la culture Noongar aux nouvelles générations.`);
+  }
+
+  function showUserProfile(username) {
+    if(username === 'Riche') {
+      // Navigate to main profile page
+      showPage('profile');
+    } else {
+      alert(`Profil de ${username}\n\nCompte utilisateur\nMembre de la communauté de préservation culturelle`);
+    }
+  }
+
+  // Upload placeholder interaction
+  function setupUploadPlaceholder() {
+    const placeholder = document.getElementById('uploadPlaceholder');
+    const fileInput = document.getElementById('postImage');
+    
+    if(placeholder && fileInput) {
+      // Drag and drop
+      placeholder.addEventListener('dragover', e => {
+        e.preventDefault();
+        placeholder.style.borderColor = 'var(--ig-primary-button)';
+      });
+      
+      placeholder.addEventListener('dragleave', e => {
+        e.preventDefault();
+        placeholder.style.borderColor = 'var(--ig-stroke)';
+      });
+      
+      placeholder.addEventListener('drop', e => {
+        e.preventDefault();
+        placeholder.style.borderColor = 'var(--ig-stroke)';
+        
+        const files = e.dataTransfer.files;
+        if(files.length > 0) {
+          fileInput.files = files;
+          handleImagePreview({target: fileInput});
+        }
+      });
+    }
+  }
+
+  function handleImagePreview(e) {
+    const file = e.target.files[0];
+    if(file) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const preview = document.getElementById('imagePreview');
+        const placeholder = document.getElementById('uploadPlaceholder');
+        
+        if(preview && placeholder) {
+          preview.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-width:100%;border-radius:8px;">`;
+          preview.classList.remove('hidden');
+          placeholder.style.display = 'none';
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  // Update the existing image change handler
+  document.getElementById('postImage').removeEventListener('change', document.getElementById('postImage').onchange);
+  document.getElementById('postImage').addEventListener('change', handleImagePreview);
+
+  // Profile tabs functionality
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      const tab = btn.dataset.tab;
+      if(tab === 'posts') {
+        displayUserPostsInProfile();
+      } else {
+        document.getElementById('userPostsGrid').innerHTML = '<p style="text-align:center;color:var(--ig-secondary-text);padding:40px;">Aucun contenu dans cette section</p>';
+      }
+    });
+  });
+
+  // Follow button functionality for suggestions
+  document.querySelectorAll('.follow-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.textContent = btn.textContent === 'Suivre' ? 'Suivi' : 'Suivre';
+      btn.style.backgroundColor = btn.textContent === 'Suivi' ? 'transparent' : 'var(--ig-primary-button)';
+      btn.style.color = btn.textContent === 'Suivi' ? 'var(--ig-primary-text)' : 'white';
+    });
+  });
+
   // Initialize UI
   updateUserPostsCount();
   displayUserPostsInProfile();
+  setupProfileNavigation();
+  setupUploadPlaceholder();
 });

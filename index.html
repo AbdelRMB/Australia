@@ -1,169 +1,216 @@
 <!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>InstaLike - Prototype</title>
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-  <header class="topbar">
-    <div class="logo">CultureKeep</div>
-    <div class="search">
-      <input placeholder="Rechercher" aria-label="Rechercher">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>InstaLike - Prototype</title>
+    <link rel="stylesheet" href="css/instagram-styles-v2.css">
+  </head>
+  <body>
+  <header class="instagram-header">
+    <div class="header-content">
+      <a href="#" class="instagram-logo">Instagram</a>
+      <div class="search-container">
+        <input type="text" class="search-input" placeholder="Rechercher">
+      </div>
+      <nav class="header-nav">
+        <span class="nav-icon">🏠</span>
+        <span class="nav-icon">💬</span>
+        <span class="nav-icon">🔍</span>
+        <span class="nav-icon">❤️</span>
+        <span class="nav-icon" onclick="toggleDarkMode()" title="Mode sombre">🌙</span>
+        <div class="nav-icon post-avatar">RK</div>
+      </nav>
     </div>
-    <nav class="icons">
-      <button class="icon">✉️</button>
-      <button class="icon">❤️</button>
-      <button class="icon" onclick="toggleDarkMode()" title="Mode sombre">🌙</button>
-      <button class="avatar">RK</button>
-    </nav>
   </header>
 
   <!-- PAGE: Feed (default) -->
   <section id="feedPage" class="page">
-    <main class="container">
-      <aside class="leftcol">
-      <section class="profile card">
-        <div class="avatar big">RK</div>
-        <div class="name">Riche</div>
-        <div class="bio">Voyageur • Étudiant • Photos d'Australie</div>
-      </section>
-
-      <section class="suggestions card">
-        <h3>Suggestions</h3>
-        <ul>
-          <li><span class="avatar small">AB</span><div><b>Alice</b><br><small>New</small></div><button>Suivre</button></li>
-          <li><span class="avatar small">DL</span><div><b>David</b><br><small>Populaire</small></div><button>Suivre</button></li>
-        </ul>
-      </section>
-    </aside>
-
-    <section class="feed">
-      <div class="feed-controls card">
-        <div class="filters">
-          <button class="filter-btn active" data-filter="all">Tous</button>
-          <button class="filter-btn" data-filter="story">Histoires</button>
-          <button class="filter-btn" data-filter="language">Langue</button>
-          <button class="filter-btn" data-filter="art">Art</button>
-          <button class="filter-btn" data-filter="conservation">Conservation</button>
+    <div class="main-layout">
+      <main class="main-feed">
+        <!-- Stories -->
+        <div class="stories-container">
+          <div class="stories" id="stories">
+            <div class="story">
+              <div class="story-avatar">
+                <div class="post-avatar">RK</div>
+              </div>
+              <div class="story-username">Riche</div>
+            </div>
+            <div class="story">
+              <div class="story-avatar">
+                <div class="post-avatar">📚</div>
+              </div>
+              <div class="story-username">Alice</div>
+            </div>
+          </div>
         </div>
-        <div class="search-small"><input placeholder="Filtrer" aria-label="Filtrer"></div>
-      </div>
-      <div class="stories card" id="stories">
-        <!-- stories will be injected -->
-      </div>
 
-      <div id="feedPlaceholder">
-        <!-- Posts will be injected here by js/app.js -->
-      </div>
+        <!-- Filtres -->
+        <div class="feed-controls" style="background: white; border: 1px solid var(--gray-400); border-radius: 3px; padding: 12px; margin-bottom: 24px;">
+          <div class="filters" style="display: flex; gap: 8px; justify-content: center;">
+            <button class="filter-btn active" data-filter="all" style="padding: 6px 12px; border: 1px solid var(--gray-400); border-radius: 4px; background: var(--blue); color: white; font-size: 12px; font-weight: 600;">Tous</button>
+            <button class="filter-btn" data-filter="story" style="padding: 6px 12px; border: 1px solid var(--gray-400); border-radius: 4px; background: white; color: var(--gray-800); font-size: 12px; font-weight: 600;">Histoires</button>
+            <button class="filter-btn" data-filter="language" style="padding: 6px 12px; border: 1px solid var(--gray-400); border-radius: 4px; background: white; color: var(--gray-800); font-size: 12px; font-weight: 600;">Langue</button>
+            <button class="filter-btn" data-filter="art" style="padding: 6px 12px; border: 1px solid var(--gray-400); border-radius: 4px; background: white; color: var(--gray-800); font-size: 12px; font-weight: 600;">Art</button>
+            <button class="filter-btn" data-filter="conservation" style="padding: 6px 12px; border: 1px solid var(--gray-400); border-radius: 4px; background: white; color: var(--gray-800); font-size: 12px; font-weight: 600;">Conservation</button>
+          </div>
+        </div>
 
-    </section>
+        <!-- Posts feed -->
+        <div id="feedPlaceholder">
+          <!-- Posts will be injected here -->
+        </div>
+      </main>
 
-    <aside class="rightcol">
-      <section class="preserve card" aria-labelledby="preserveTitle">
-        <h3 id="preserveTitle">Préservation culturelle</h3>
-        <p><strong>Tribu :</strong> Noongar</p>
-        <p><strong>Localisation :</strong> South West, Western Australia</p>
-        <p class="muted">But : aider à préserver la langue et la culture Noongar via des ressources, des mots à apprendre et des histoires.</p>
-        <h4>Ressources</h4>
-        <ul>
-          <li><a href="https://www.noongarculture.org.au" target="_blank" rel="noopener">Noongar Culture Org (exemple)</a></li>
-          <li><a href="#" id="contributeLink">Contribuer une ressource</a></li>
-        </ul>
-        <h4>Mots Noongar</h4>
-        <ul id="languageList" class="language-list">
-          <!-- language words injected here -->
-        </ul>
-      </section>
-    </aside>
-    </main>
+      <aside class="sidebar">
+        <div class="sidebar-profile">
+          <div class="sidebar-avatar">RK</div>
+          <div class="sidebar-user-info">
+            <h4>riche_cultural</h4>
+            <p>Riche</p>
+          </div>
+        </div>
+
+        <div class="suggestions">
+          <div class="suggestions-header">
+            <h3 class="suggestions-title">Suggestions pour vous</h3>
+            <a href="#" class="suggestions-see-all">Voir tout</a>
+          </div>
+          <div class="suggestion-item">
+            <div class="suggestion-avatar">📚</div>
+            <div class="suggestion-info">
+              <div class="suggestion-username">education_culturelle</div>
+              <div class="suggestion-subtitle">Suivi par 2 amis</div>
+            </div>
+            <button class="follow-btn">Suivre</button>
+          </div>
+          <div class="suggestion-item">
+            <div class="suggestion-avatar">🛡️</div>
+            <div class="suggestion-info">
+              <div class="suggestion-username">preservation_noongar</div>
+              <div class="suggestion-subtitle">Populaire</div>
+            </div>
+            <button class="follow-btn">Suivre</button>
+          </div>
+        </div>
+
+        <div style="margin-top: 32px;">
+          <h4 style="color: var(--gray-600); font-size: 14px; font-weight: 600; margin-bottom: 12px;">Mots Noongar</h4>
+          <ul id="languageList" class="language-list" style="list-style: none; padding: 0;">
+            <!-- language words injected here -->
+          </ul>
+          <a href="#" id="contributeLink" style="color: var(--blue); font-size: 12px; text-decoration: none;">Contribuer une ressource</a>
+        </div>
+      </aside>
+    </div>
   </section>
 
   <!-- PAGE: Créer Post -->
   <section id="createPage" class="page hidden">
-    <div class="container single-col">
-      <div class="card">
-        <h2>Créer un post culturel</h2>
-        <form id="createPostForm">
-          <div class="form-group">
-            <label>Image :</label>
-            <input type="file" id="postImage" accept="image/*" required>
-            <div id="imagePreview" class="image-preview hidden"></div>
-          </div>
-          <div class="form-group">
-            <label>Titre :</label>
-            <input type="text" id="postTitle" placeholder="Ex: Atelier tissage traditionnel" required>
-          </div>
-          <div class="form-group">
-            <label>Description :</label>
-            <textarea id="postDescription" rows="4" placeholder="Décris l'importance culturelle, le lieu, l'impact..." required></textarea>
-          </div>
-          <div class="form-group">
-            <label>Catégorie :</label>
-            <select id="postCategory" required>
-              <option value="">Choisir...</option>
-              <option value="story">Histoire/Récit</option>
-              <option value="language">Langue</option>
-              <option value="art">Art/Artisanat</option>
-              <option value="conservation">Conservation</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Localisation :</label>
-            <input type="text" id="postLocation" placeholder="Ex: Perth, WA" required>
-          </div>
-          <div class="form-actions">
-            <button type="submit" class="btn primary">Publier le post</button>
-            <button type="button" class="btn outline" onclick="showPage('feed')">Annuler</button>
-          </div>
-        </form>
+    <div class="create-container">
+      <div class="create-header">
+        <h2>Créer un nouveau post</h2>
       </div>
+      
+      <form id="createPostForm" class="create-form">
+        <div class="photo-upload-area">
+          <div class="upload-placeholder" id="uploadPlaceholder">
+            <div class="upload-icon">📷</div>
+            <p>Glissez des photos et vidéos ici</p>
+            <button type="button" class="select-btn" onclick="document.getElementById('postImage').click()">Sélectionner sur l'ordinateur</button>
+          </div>
+          <input type="file" id="postImage" name="photo" accept="image/*" style="display:none" required>
+          <div class="photo-preview" id="imagePreview" style="display:none;"></div>
+        </div>
+
+        <div class="form-row">
+          <div class="post-avatar">RK</div>
+          <div class="form-inputs">
+            <textarea id="postDescription" name="content" placeholder="Rédigez une légende..." maxlength="2200" required></textarea>
+            
+            <div class="form-options">
+              <input type="text" id="postLocation" name="location" placeholder="Ajouter un lieu" required>
+              <input type="text" id="postTitle" name="title" placeholder="Titre du post" required>
+              <select id="postCategory" required>
+                <option value="">Choisir une catégorie...</option>
+                <option value="story">Histoire/Récit</option>
+                <option value="language">Langue</option>
+                <option value="art">Art/Artisanat</option>
+                <option value="conservation">Conservation</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="publish-btn">Partager</button>
+          <button type="button" class="cancel-btn" onclick="showPage('feed')">Annuler</button>
+        </div>
+      </form>
     </div>
   </section>
 
   <!-- PAGE: Profil -->
   <section id="profilePage" class="page hidden">
-    <div class="container single-col">
-      <div class="card">
-        <div class="profile-header">
-          <div class="avatar big">RK</div>
-          <div class="profile-info">
-            <h2>Riche</h2>
-            <p>Étudiant passionné par la préservation culturelle</p>
-            <div class="profile-stats">
-              <span><strong id="userPostsCount">0</strong> posts créés</span>
-              <span><strong>25</strong> suivis</span>
+    <div class="profile-container">
+      <div class="profile-header">
+        <div class="profile-avatar-large">RK</div>
+        <div class="profile-info">
+          <div class="profile-username-row">
+            <div class="profile-username">
+              <h1>riche_cultural</h1>
             </div>
+            <button class="edit-profile-btn">Modifier le profil</button>
+            <span style="cursor: pointer; font-size: 24px;">⚙️</span>
+          </div>
+          <div class="profile-stats">
+            <span><strong id="userPostsCount">0</strong> publications</span>
+            <span><strong>150</strong> abonnés</span>
+            <span><strong>25</strong> abonnements</span>
+          </div>
+          <div class="profile-bio">
+            <strong>Riche</strong><br>
+            Étudiant passionné par la préservation culturelle Noongar 🪃<br>
+            Perth, Western Australia 🇦🇺
           </div>
         </div>
       </div>
-      <div class="card">
-        <h3>Mes posts</h3>
-        <div id="userPostsGrid" class="posts-grid">
-          <!-- User posts will be displayed here -->
-        </div>
+
+      <div class="profile-tabs">
+        <button class="tab-btn active" data-tab="posts">
+          <span style="margin-right: 6px;">⊞</span>
+          PUBLICATIONS
+        </button>
+        <button class="tab-btn" data-tab="saved">
+          <span style="margin-right: 6px;">🔖</span>
+          ENREGISTRÉ
+        </button>
+        <button class="tab-btn" data-tab="tagged">
+          <span style="margin-right: 6px;">👤</span>
+          IDENTIFIÉ
+        </button>
+      </div>
+
+      <div id="userPostsGrid" class="posts-grid">
+        <!-- User posts will be displayed here -->
       </div>
     </div>
   </section>
 
   <!-- PAGE: Découvrir -->
   <section id="discoverPage" class="page hidden">
-    <div class="container single-col">
-      <div class="card">
-        <h2>Découvrir</h2>
-        <p>Explore d'autres initiatives de préservation culturelle.</p>
-        <div class="discover-grid">
-          <div class="discover-item">
-            <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=400&auto=format&fit=crop" alt="Culture">
-            <h4>Ressources documentaires</h4>
-            <p>Archives et documents historiques Noongar</p>
-          </div>
-          <div class="discover-item">
-            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=400&auto=format&fit=crop" alt="Nature">
-            <h4>Sites sacrés</h4>
-            <p>Carte interactive des lieux significatifs</p>
-          </div>
+    <div class="explore-container">
+      <div class="explore-grid">
+        <!-- Explore posts grid will be populated by JS -->
+        <div class="explore-item">
+          <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=400&auto=format&fit=crop" alt="Culture">
+        </div>
+        <div class="explore-item">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=400&auto=format&fit=crop" alt="Nature">
+        </div>
+        <div class="explore-item">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=400&auto=format&fit=crop" alt="Landscape">
         </div>
       </div>
     </div>
