@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
 
   function deleteUserPost(postId){
-    if(confirm('Supprimer ce post ?')){
+    if(confirm('Delete this post?')){
       userPosts = userPosts.filter(p => p.id !== postId);
       localStorage.setItem(userPostsKey, JSON.stringify(userPosts));
       updateUserPostsCount();
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       // Go to feed
       showPage('feed');
       
-      alert('Post créé avec succès !');
+      alert('Post created successfully!');
     };
     reader.readAsDataURL(imageInput.files[0]);
   });
@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       const known = learned.includes(w.id);
       li.innerHTML = `<div><strong class="listen" data-word="${w.noongar}" style="cursor:pointer">${w.noongar}</strong> — <small class="muted">${w.english}</small></div>`;
       const btn = document.createElement('button');
-      btn.textContent = known ? 'Appris' : 'Marquer appris';
+      btn.textContent = known ? 'Learned' : 'Mark as learned';
       if(known) btn.classList.add('learned');
       btn.addEventListener('click',()=>{
         if(learned.includes(w.id)){
@@ -182,14 +182,14 @@ document.addEventListener('DOMContentLoaded',()=>{
   // contribute resource link (demo prompt)
   document.getElementById('contributeLink').addEventListener('click',e=>{
     e.preventDefault();
-    const url = prompt('Ajouter un lien utile pour la préservation (URL) :');
+    const url = prompt('Add a useful link for preservation (URL) :');
     if(url){
       // for demo, store in sessionStorage and alert
       const key = 'contrib_resources';
       const list = JSON.parse(sessionStorage.getItem(key)||'[]');
       list.push({url,ts:Date.now()});
       sessionStorage.setItem(key,JSON.stringify(list));
-      alert('Merci — ressource ajoutée (demo).');
+      alert('Thank you — resource added (demo).');
     }
   });
 
@@ -202,25 +202,25 @@ document.addEventListener('DOMContentLoaded',()=>{
   };
 
   const culturePosts = [
-    {user:'Éducation Culturelle',account:'education',loc:'Perth Schools',img:'https://images.unsplash.com/photo-1504198453319-5ce911bafcde?q=80&w=1200&auto=format&fit=crop',caption:'Programme scolaire : enseigner les mots Noongar aux enfants',category:'language'},
-    {user:'Préservation Noongar',account:'preservation',loc:'South West WA',img:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop',caption:'Documentation des récits traditionnels des anciens',category:'story'},
-    {user:'Artisanat Traditionnel',account:'artcraft',loc:'Perth',img:'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?q=80&w=1200&auto=format&fit=crop',caption:'Atelier de tissage avec les anciens : transmission du savoir-faire',category:'art'},
-    {user:'Éducation Culturelle',account:'education',loc:'Albany',img:'https://images.unsplash.com/photo-1499346030926-9a72daac6c63?q=80&w=1200&auto=format&fit=crop',caption:'Chorale communautaire : préserver la langue par la musique',category:'language'},
-    {user:'Préservation Noongar',account:'preservation',loc:'Margaret River',img:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200&auto=format&fit=crop',caption:'Projet de conservation côtière : prendre soin du pays',category:'conservation'},
-    {user:'Éducation Culturelle',account:'education',loc:'Denmark',img:'https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=1200&auto=format&fit=crop',caption:'Enseigner les noms de lieux Noongar à la nouvelle génération',category:'language'},
-    {user:'Artisanat Traditionnel',account:'artcraft',loc:'Fremantle',img:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1200&auto=format&fit=crop',caption:'Projet de fresque murale célébrant les histoires Noongar',category:'art'},
-    {user:'Éducation Culturelle',account:'education',loc:'Bunbury',img:'https://images.unsplash.com/photo-1470770903676-69b98201ea1c?q=80&w=1200&auto=format&fit=crop',caption:'Cours de Noongar : salutations de base et mots de la nature',category:'language'},
-    {user:'Préservation Noongar',account:'preservation',loc:'Mandurah',img:'https://images.unsplash.com/photo-1504198453319-5ce911bafcde?q=80&w=1200&auto=format&fit=crop',caption:'Cueillette de nourriture dans la brousse : connaissances traditionnelles',category:'conservation'},
-    {user:'Communauté Noongar',account:'community',loc:'Perth',img:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200&auto=format&fit=crop',caption:'Festival culturel annuel : danse et artisanat',category:'story'},
-    {user:'Préservation Noongar',account:'preservation',loc:'Bunbury',img:'https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop',caption:'Histoire du Dreamtime : la création des rivières',category:'story'},
-    {user:'Artisanat Traditionnel',account:'artcraft',loc:'Rural',img:'https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop',caption:'Tissage de paniers avec des fibres naturelles',category:'art'},
-    {user:'Artisanat Traditionnel',account:'artcraft',loc:'Perth',img:'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format&fit=crop',caption:'Art contemporain inspiré des motifs Noongar',category:'art'},
-    {user:'Communauté Noongar',account:'community',loc:'South West',img:'https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop',caption:'Conseil des anciens : programmes de revitalisation linguistique',category:'story'},
-    {user:'Préservation Noongar',account:'preservation',loc:'Coastline',img:'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop',caption:'Surveillance des espèces côtières : transmission des connaissances',category:'conservation'},
-    {user:'Éducation Culturelle',account:'education',loc:'Region',img:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop',caption:'Carte interactive des noms de lieux Noongar',category:'story'},
-    {user:'Préservation Noongar',account:'preservation',loc:'Archive',img:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1200&auto=format&fit=crop',caption:'Enregistrement des histoires orales des anciens',category:'story'},
-    {user:'Éducation Culturelle',account:'education',loc:'School',img:'https://images.unsplash.com/photo-1504198453319-5ce911bafcde?q=80&w=1200&auto=format&fit=crop',caption:'Visite scolaire : apprendre des mots et des chansons',category:'language'},
-    {user:'Communauté Noongar',account:'community',loc:'Trail',img:'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop',caption:'Marche patrimoniale guidée : nommer les sites en Noongar',category:'story'},
+    {user:'Éducation Culturelle',account:'education',loc:'Perth Schools',img:'https://images.unsplash.com/photo-1504198453319-5ce911bafcde?q=80&w=1200&auto=format&fit=crop',caption:'Curriculum: teaching Noongar words to children',category:'language'},
+    {user:'Préservation Noongar',account:'preservation',loc:'South West WA',img:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop',caption:'Documentation of traditional stories from the elders',category:'story'},
+    {user:'Artisanat Traditionnel',account:'artcraft',loc:'Perth',img:'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?q=80&w=1200&auto=format&fit=crop',caption:'Weaving workshop with the elders: passing on the know-how',category:'art'},
+    {user:'Éducation Culturelle',account:'education',loc:'Albany',img:'https://images.unsplash.com/photo-1499346030926-9a72daac6c63?q=80&w=1200&auto=format&fit=crop',caption:'Community choir: preserving the language through music',category:'language'},
+    {user:'Préservation Noongar',account:'preservation',loc:'Margaret River',img:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200&auto=format&fit=crop',caption:'Coastal conservation project: caring for the land',category:'conservation'},
+    {user:'Éducation Culturelle',account:'education',loc:'Denmark',img:'https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=1200&auto=format&fit=crop',caption:'Teaching Noongar place names to the new generation',category:'language'},
+    {user:'Artisanat Traditionnel',account:'artcraft',loc:'Fremantle',img:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1200&auto=format&fit=crop',caption:'Mural project celebrating Noongar stories',category:'art'},
+    {user:'Éducation Culturelle',account:'education',loc:'Bunbury',img:'https://images.unsplash.com/photo-1470770903676-69b98201ea1c?q=80&w=1200&auto=format&fit=crop',caption:'Noongar classes: basic greetings and nature words',category:'language'},
+    {user:'Préservation Noongar',account:'preservation',loc:'Mandurah',img:'https://images.unsplash.com/photo-1504198453319-5ce911bafcde?q=80&w=1200&auto=format&fit=crop',caption:'Bushfood gathering: traditional knowledge',category:'conservation'},
+    {user:'Communauté Noongar',account:'community',loc:'Perth',img:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1200&auto=format&fit=crop',caption:'Annual cultural festival: dance and crafts',category:'story'},
+    {user:'Préservation Noongar',account:'preservation',loc:'Bunbury',img:'https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop',caption:'Dreamtime story: the creation of rivers',category:'story'},
+    {user:'Artisanat Traditionnel',account:'artcraft',loc:'Rural',img:'https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop',caption:'Basket weaving with natural fibers',category:'art'},
+    {user:'Artisanat Traditionnel',account:'artcraft',loc:'Perth',img:'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format&fit=crop',caption:'Contemporary art inspired by Noongar patterns',category:'art'},
+    {user:'Communauté Noongar',account:'community',loc:'South West',img:'https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop',caption:'Elders council: language revitalization programs',category:'story'},
+    {user:'Préservation Noongar',account:'preservation',loc:'Coastline',img:'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop',caption:'Monitoring coastal species: knowledge transmission',category:'conservation'},
+    {user:'Éducation Culturelle',account:'education',loc:'Region',img:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop',caption:'Interactive map of Noongar place names',category:'story'},
+    {user:'Préservation Noongar',account:'preservation',loc:'Archive',img:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1200&auto=format&fit=crop',caption:'Recording oral histories of the elders',category:'story'},
+    {user:'Éducation Culturelle',account:'education',loc:'School',img:'https://images.unsplash.com/photo-1504198453319-5ce911bafcde?q=80&w=1200&auto=format&fit=crop',caption:'School visit: learning words and songs',category:'language'},
+    {user:'Communauté Noongar',account:'community',loc:'Trail',img:'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop',caption:'Heritage walk: naming sites in Noongar',category:'story'},
   ];
 
   const feedPlaceholder = document.getElementById('feedPlaceholder');
@@ -281,14 +281,14 @@ document.addEventListener('DOMContentLoaded',()=>{
           </button>
         </div>
         <div class="post-likes">
-          <span class="likes-count">${likesState[postId] ?? Math.floor(Math.random()*200+10)} mentions J'aime</span>
+          <span class="likes-count">${likesState[postId] ?? Math.floor(Math.random()*200+10)} likes</span>
         </div>
         <div class="post-caption">
           <span class="caption-username">${p.user}</span>
           <span class="caption-text">${description}</span>
         </div>
-        <button class="post-comments-btn view-comments" data-idx="${idx}" data-is-user="${!!p.id}">Afficher les 12 commentaires</button>
-        <div class="post-time">IL Y A ${Math.floor(Math.random()*24+1)} HEURES</div>
+        <button class="post-comments-btn view-comments" data-idx="${idx}" data-is-user="${!!p.id}">View 12 comments</button>
+        <div class="post-time">${Math.floor(Math.random()*24+1)} HOURS AGO</div>
       `;
       feedPlaceholder.appendChild(art);
     });
@@ -307,7 +307,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         const liked = btn.classList.toggle('liked');
         count = liked ? count+1 : Math.max(0,count-1);
         
-        likesCountEl.textContent = `${count} mentions J'aime`;
+        likesCountEl.textContent = `${count} likes`;
         heartIcon.textContent = liked ? '❤️' : '♡';
         
         // heart burst animation
@@ -394,12 +394,12 @@ document.addEventListener('DOMContentLoaded',()=>{
         <img src="${p.img}" alt="${title}">
         <h2>${title}</h2>
         <p>${description}</p>
-        <p><strong>Localisation:</strong> ${p.loc}</p>
+        <p><strong>Location:</strong> ${p.loc}</p>
         ${isUserPost ? 
-          '<p><small>🎨 Post créé par toi</small></p>' :
+          '<p><small>🎨 Post created by you</small></p>' :
           `<div class="cta-row">
-            <button class="cta primary" id="supportBtn">Soutenir</button>
-            <button class="cta secondary" id="learnMoreBtn">En savoir plus</button>
+            <button class="cta primary" id="supportBtn">Support</button>
+            <button class="cta secondary" id="learnMoreBtn">Learn more</button>
           </div>`
         }
       `;
@@ -411,7 +411,7 @@ document.addEventListener('DOMContentLoaded',()=>{
           window.open('https://example.com/donate','_blank');
         });
         document.getElementById('learnMoreBtn').addEventListener('click',()=>{
-          alert('Page d\'information: (demo)');
+          alert('Information page: (demo)');
         });
       }
     }
@@ -487,7 +487,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     const account = specializedAccounts[accountType];
     const posts = culturePosts.filter(p => p.account === accountType);
     
-    alert(`Profil de ${username}\n\n${account.avatar} Compte spécialisé en préservation culturelle Noongar\n\n${posts.length} publications\n500+ abonnés\n\nMission: Préserver et transmettre la culture Noongar aux nouvelles générations.`);
+    alert(`Profile of ${username}\n\n${account.avatar} Specialized account for Noongar cultural preservation\n\n${posts.length} posts\n500+ followers\n\nMission: Preserve and transmit Noongar culture to new generations.`);
   }
 
   function showUserProfile(username) {
@@ -495,7 +495,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       // Navigate to main profile page
       showPage('profile');
     } else {
-      alert(`Profil de ${username}\n\nCompte utilisateur\nMembre de la communauté de préservation culturelle`);
+      alert(`Profile of ${username}\n\nUser account\nMember of the cultural preservation community`);
     }
   }
 
@@ -561,7 +561,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       if(tab === 'posts') {
         displayUserPostsInProfile();
       } else {
-        document.getElementById('userPostsGrid').innerHTML = '<p style="text-align:center;color:var(--ig-secondary-text);padding:40px;">Aucun contenu dans cette section</p>';
+        document.getElementById('userPostsGrid').innerHTML = '<p style="text-align:center;color:var(--ig-secondary-text);padding:40px;">No content in this section</p>';
       }
     });
   });
@@ -583,6 +583,46 @@ document.addEventListener('DOMContentLoaded',()=>{
       });
     }
   });
+
+  // Navigation to profile from post
+  document.addEventListener('click', function(e) {
+    const usernameEl = e.target.closest('.post-username');
+    const avatarEl = e.target.closest('.post-avatar');
+    const postEl = e.target.closest('.post');
+    if ((usernameEl || avatarEl) && postEl) {
+      e.preventDefault();
+      const name = postEl.querySelector('.post-username').textContent.trim();
+      showDynamicProfile(name);
+    }
+  });
+
+  function showDynamicProfile(username) {
+    // Find posts by this user
+    const allPosts = [...userPosts, ...culturePosts];
+    const userPostsList = allPosts.filter(p => p.user === username);
+    // Fill profile info
+    document.getElementById('dynamicProfileUsername').textContent = username;
+    document.getElementById('dynamicProfileAvatar').textContent = username === 'Riche' ? 'RK' : username[0];
+    document.getElementById('dynamicProfilePostsCount').textContent = userPostsList.length;
+    document.getElementById('dynamicProfileFollowers').textContent = Math.floor(Math.random()*500+100);
+    document.getElementById('dynamicProfileFollowing').textContent = Math.floor(Math.random()*200+50);
+    document.getElementById('dynamicProfileBio').textContent = (username === 'Riche') ? 'Noongar culture enthusiast. Sharing stories and language.' : 'Member of the Noongar cultural community.';
+    // Fill posts grid
+    const grid = document.getElementById('dynamicUserPostsGrid');
+    grid.innerHTML = '';
+    if(userPostsList.length === 0) {
+      grid.innerHTML = '<p style="text-align:center;color:var(--ig-secondary-text);padding:40px;">No posts yet.</p>';
+    } else {
+      userPostsList.forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'user-post-item';
+        div.innerHTML = `<img src="${p.img}" alt="${p.title||p.caption}">`;
+        grid.appendChild(div);
+      });
+    }
+    // Show the dynamic profile page
+    showPage('dynamicProfile');
+  }
 
   // Initialize UI
   updateUserPostsCount();
